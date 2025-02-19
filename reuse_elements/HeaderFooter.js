@@ -64,7 +64,7 @@ class SpecialHeader extends HTMLElement {
             
             .dropdown-item {
                 color: #333;
-                padding: 0.75rem 1.5rem;
+                padding: 0.45rem 1.5rem;
                 position: relative;
                 transition: background-color 0.3s ease, color 0.3s ease;
             }
@@ -81,7 +81,7 @@ class SpecialHeader extends HTMLElement {
             .dropdown-submenu .dropdown-menu {
                 top: 0;
                 left: 100%;
-                margin-top: -8px;
+                margin-top: -6px;
                 margin-left: 1px;
                 background: linear-gradient(135deg, rgba(245,245,245,0.9) 0%, rgba(230,230,230,0.9) 100%);
                 border-radius: 8px;
