@@ -56,19 +56,21 @@ class SpecialHeader extends HTMLElement {
         </nav>
         <style>
             .dropdown-menu {
-                background: transparent !important;
-                border: none !important;
-                box-shadow: none !important;
+                background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(238,238,238,0.9) 100%);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
             }
             
             .dropdown-item {
-                color: #000;
-                padding: 0.5rem 1rem;
+                color: #333;
+                padding: 0.75rem 1.5rem;
                 position: relative;
+                transition: background-color 0.3s ease, color 0.3s ease;
             }
             
             .dropdown-item:hover {
-                background: transparent;
+                background-color: rgba(13, 110, 253, 0.1); /* Light blue for hover */
                 color: #0d6efd;
             }
             
@@ -79,7 +81,10 @@ class SpecialHeader extends HTMLElement {
             .dropdown-submenu .dropdown-menu {
                 top: 0;
                 left: 100%;
-                margin-top: -1px;
+                margin-top: -8px;
+                margin-left: 1px;
+                background: linear-gradient(135deg, rgba(245,245,245,0.9) 0%, rgba(230,230,230,0.9) 100%);
+                border-radius: 8px;
             }
             
             .submenu-arrow {
@@ -96,8 +101,12 @@ class SpecialHeader extends HTMLElement {
             
             @media (max-width: 991px) {
                 .dropdown-menu, .dropdown-submenu .dropdown-menu {
+                    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,240,240,0.95) 100%);
                     padding-left: 20px;
                     position: static;
+                    box-shadow: none;
+                    border: none;
+                    border-radius: 0;
                 }
                 
                 .submenu-arrow {
@@ -110,6 +119,10 @@ class SpecialHeader extends HTMLElement {
                 
                 .dropdown-submenu .dropdown-menu.show {
                     display: block;
+                }
+                
+                .dropdown-item {
+                    padding: 0.5rem 1rem;
                 }
             }
         </style>
@@ -206,7 +219,7 @@ const commonStyles = `
     }
     
     .desc_item a:hover {
-        color: #0d6efd;
+        color:rgb(214, 219, 228);
     }
     
     #footer {
