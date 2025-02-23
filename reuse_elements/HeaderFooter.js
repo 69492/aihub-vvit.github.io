@@ -55,24 +55,21 @@ class SpecialHeader extends HTMLElement {
             </div>
         </nav>
         <style>
-            .dropdown-menu {
-                background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(238,238,238,0.9) 100%);
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
-            }
-            
-            .dropdown-item {
-                color: #333;
-                padding: 0.45rem 1.5rem;
-                position: relative;
-                transition: background-color 0.3s ease, color 0.3s ease;
-            }
-            
-            .dropdown-item:hover {
-                background-color: rgba(13, 110, 253, 0.1); /* Light blue for hover */
-                color: #0d6efd;
-            }
+    .dropdown-menu {
+        background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(238,238,238,0.9) 100%);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-top: 0; /* Reduced from default */
+        padding: 0.2rem 0; /* Reduced padding */
+    }
+    
+    .dropdown-item {
+        color: #333;
+        padding: 0.35rem 1.2rem; /* Reduced padding */
+        position: relative;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
             
             .dropdown-submenu {
                 position: relative;
