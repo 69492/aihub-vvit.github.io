@@ -98,6 +98,7 @@
     <div class="game-container">
         <div class="header">
             <h1>Space Invaders</h1>
+            <button onclick="history.back()" class="back-btn">Back</button>
             <div class="score-level">
                 <div id="scoreBoard">Score: 0</div>
                 <div id="levelBoard">Level: 1</div>
@@ -105,7 +106,6 @@
         </div>
         <canvas id="gameCanvas" width="600" height="700"></canvas>
     </div>
-    <button onclick="history.back()" class="back-btn">Back</button>
     <button id="restartButton" onclick="restartGame()">Restart Game</button>
     <script>
         const canvas = document.getElementById("gameCanvas");
