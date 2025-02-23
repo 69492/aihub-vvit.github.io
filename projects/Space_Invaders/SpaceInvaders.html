@@ -12,12 +12,12 @@
             width: 100%;
             overflow: hidden;
             font-size: 16px;
+            background-color: #000;
         }
         body {
-            background-color: #000;
             color: white;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
             position: relative;
@@ -26,41 +26,43 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-            max-width: 800px;
+            width: 400px; /* Reduced width */
             padding: 20px;
             position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
         }
         .header {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 15px;
             position: relative;
         }
         .score-level {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 5px;
+            padding: 0 10px;
         }
         canvas {
             border: 2px solid #333;
             background-color: black;
-            max-width: 100%;
-            height: auto;
+            width: 400px; /* Canvas width */
+            height: 500px; /* Canvas height */
         }
         #scoreBoard, #levelBoard {
-            font-size: 24px;
+            font-size: 18px;
             margin: 0;
             color: #fff;
         }
         #restartButton {
             display: none;
             margin-top: 20px;
-            font-size: 20px;
-            padding: 10px 20px;
+            font-size: 16px;
+            padding: 8px 16px;
             cursor: pointer;
             background-color: #4CAF50;
             border: none;
@@ -74,8 +76,8 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 8px 16px;
+            font-size: 16px;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -87,8 +89,8 @@
             background-color: #45a049;
         }
         h1 {
-            font-size: 36px;
-            margin: 20px 0 10px 0;
+            font-size: 24px;
+            margin: 10px 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
     </style>
@@ -103,7 +105,7 @@
                 <div id="levelBoard">Level: 1</div>
             </div>
         </div>
-        <canvas id="gameCanvas" width="600" height="700"></canvas>
+        <canvas id="gameCanvas" width="400" height="500"></canvas>
     </div>
     <button id="restartButton" onclick="restartGame()">Restart Game</button>
 
@@ -124,12 +126,12 @@
         const levelBoard = document.getElementById("levelBoard");
         const restartButton = document.getElementById("restartButton");
 
-        // Game constants
-        const SPACESHIP_SPEED = 8;
-        const BULLET_SPEED = 7;
-        const ALIEN_SPEED = 2;
+        // Adjusted game constants for smaller canvas
+        const SPACESHIP_SPEED = 5;
+        const BULLET_SPEED = 5;
+        const ALIEN_SPEED = 1;
         const SHOOT_COOLDOWN = 400;
-        const ALIEN_BULLET_SPEED = 5;
+        const ALIEN_BULLET_SPEED = 3;
         const ALIEN_SHOOT_COOLDOWN = 1500;
 
         // Game state
@@ -140,13 +142,13 @@
         let level = 1;
         let startX;
 
-        // Game classes
+        // Adjusted Spaceship class for smaller size
         class Spaceship {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.width = 50;
-                this.height = 50;
+                this.width = 30;  // Reduced size
+                this.height = 30; // Reduced size
             }
 
             draw() {
@@ -172,12 +174,13 @@
             }
         }
 
+        // Adjusted Bullet class
         class Bullet {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.width = 3;
-                this.height = 15;
+                this.width = 2;  // Reduced size
+                this.height = 10; // Reduced size
             }
 
             draw() {
@@ -190,12 +193,13 @@
             }
         }
 
+        // Adjusted Alien class
         class Alien {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.width = 40;
-                this.height = 40;
+                this.width = 25;  // Reduced size
+                this.height = 25; // Reduced size
                 this.moveDirection = 1;
                 this.moveCounter = 0;
             }
@@ -211,7 +215,7 @@
                 if (this.moveCounter > 75) {
                     this.moveDirection *= -1;
                     this.moveCounter = 0;
-                    this.y += 20; // Move down when changing direction
+                    this.y += 15; // Reduced movement down
                 }
             }
 
@@ -224,12 +228,13 @@
             }
         }
 
+        // Adjusted AlienBullet class
         class AlienBullet {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.width = 3;
-                this.height = 15;
+                this.width = 2;  // Reduced size
+                this.height = 10; // Reduced size
             }
 
             draw() {
@@ -242,11 +247,9 @@
             }
         }
 
-        // Game objects
-        let spaceship, bullets, aliens, alienBullets;
-
+        // Game initialization
         function initializeGame() {
-            spaceship = new Spaceship(canvas.width / 2 - 25, canvas.height - 100);
+            spaceship = new Spaceship(canvas.width / 2 - 15, canvas.height - 50);
             bullets = [];
             aliens = [];
             alienBullets = [];
@@ -262,16 +265,17 @@
 
         function createAliens() {
             aliens = [];
-            let rows = Math.min(3 + Math.floor(level / 2), 6);
-            let cols = Math.min(6 + Math.floor(level / 3), 10);
+            let rows = Math.min(3 + Math.floor(level / 2), 5);
+            let cols = Math.min(5 + Math.floor(level / 3), 8);
             
             for (let row = 0; row < rows; row++) {
                 for (let col = 0; col < cols; col++) {
-                    aliens.push(new Alien(50 + col * 60, 50 + row * 60));
+                    aliens.push(new Alien(30 + col * 45, 40 + row * 45));
                 }
             }
         }
 
+        // Rest of the game functions remain the same
         function updateScore() {
             scoreBoard.innerText = `Score: ${score}`;
         }
@@ -292,40 +296,34 @@
 
             if (gameOver) {
                 ctx.fillStyle = "white";
-                ctx.font = "40px Arial";
-                ctx.fillText("Game Over", canvas.width / 2 - 100, canvas.height / 2);
-                ctx.font = "24px Arial";
-                ctx.fillText(`Final Score: ${score}`, canvas.width / 2 - 70, canvas.height / 2 + 40);
+                ctx.font = "30px Arial";
+                ctx.fillText("Game Over", canvas.width / 2 - 70, canvas.height / 2);
+                ctx.font = "18px Arial";
+                ctx.fillText(`Final Score: ${score}`, canvas.width / 2 - 50, canvas.height / 2 + 30);
                 restartButton.style.display = "block";
                 return;
             }
 
-            // Update and draw spaceship
             spaceship.draw();
 
-            // Update and draw bullets
             bullets.forEach((bullet, index) => {
                 bullet.update();
                 bullet.draw();
                 if (bullet.y < 0) bullets.splice(index, 1);
             });
 
-            // Update and draw aliens
             aliens.forEach((alien, aIndex) => {
                 alien.update();
                 alien.draw();
 
-                // Random alien shooting
                 if (Math.random() < 0.001 * level) {
                     alien.shoot();
                 }
 
-                // Check if alien reached bottom
                 if (alien.y + alien.height >= spaceship.y) {
                     gameOver = true;
                 }
 
-                // Check bullet collisions
                 bullets.forEach((bullet, bIndex) => {
                     if (checkCollision(bullet, alien)) {
                         aliens.splice(aIndex, 1);
@@ -336,7 +334,6 @@
                 });
             });
 
-            // Update and draw alien bullets
             alienBullets.forEach((bullet, index) => {
                 bullet.update();
                 bullet.draw();
@@ -350,7 +347,6 @@
                 }
             });
 
-            // Check level completion
             if (aliens.length === 0) {
                 level++;
                 updateLevel();
@@ -371,7 +367,6 @@
             if (event.key === " ") spaceship.shoot();
         });
 
-        // Touch controls
         canvas.addEventListener('touchstart', function(e) {
             startX = e.touches[0].clientX;
             spaceship.shoot();
@@ -398,7 +393,6 @@
             e.preventDefault();
         });
 
-        // Prevent default touch behavior
         document.body.addEventListener('touchstart', function(e) {
             if (e.target === canvas) {
                 e.preventDefault();
