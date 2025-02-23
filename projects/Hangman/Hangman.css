@@ -6,7 +6,21 @@
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
 }
-
+.back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .back-btn:hover {
+            background-color: #45a049;
 body {
     display: flex;
     padding: 0 10px;
