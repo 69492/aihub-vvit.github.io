@@ -79,11 +79,31 @@
             color: white;
             border-radius: 0.313rem; 
             position: absolute;
-            bottom: 3.25rem; 
+            bottom: 4rem; 
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
-        }        
+        } 
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 8px 16px;
+            font-size: 1rem;
+            background-color: rgba(69, 160, 73, 0.9);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-btn:hover {
+            background-color: rgba(76, 175, 80, 1);
+        }
         #restartButton:hover {
             background-color: #45a049;
         }        
@@ -92,9 +112,26 @@
             margin: 1.25rem 0 0.625rem 0;
             text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.7);
         }
+        
+        /* Add responsive styles for mobile */
+        @media (max-width: 768px) {
+            .back-btn {
+                top: 5px;
+                left: 5px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            /* Adjust header spacing to prevent overlap */
+            .header h1 {
+                margin-top: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <button onclick="history.back()" class="back-btn">← Back</button>
+    
     <div class="game-container">
         <div class="header">
             <h1>Space Invaders</h1>
